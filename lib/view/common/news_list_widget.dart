@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/utils/color_consts.dart';
+import 'package:news_app/view/common/navigation_helper.dart';
+import 'package:news_app/view/common/single_news_widget.dart';
+import 'package:news_app/view/news/screen_single_news.dart';
 
-Widget songsListWidget(
+Widget newsListWidget(
   String title,
   String description,
   VoidCallback butttonOnpPress,
@@ -9,38 +12,24 @@ Widget songsListWidget(
   VoidCallback onTap,
 ) {
   return ListView.separated(
-    itemBuilder: (context, index) => ListTile(
-      leading: const CircleAvatar(
-        radius: 20,
-        backgroundColor: kMainColor,
-      ),
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Text(
-            description,
-            style: const TextStyle(fontSize: 14),
-          ),
-        ],
-      ),
-      trailing: IconButton(
-        onPressed: butttonOnpPress,
-        icon: const Icon(
-          Icons.more_vert,
+    itemBuilder: (context, index) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 5,
         ),
-      ),
-      onTap: onTap,
-    ),
+        child: InkWell(
+            onTap: () {
+              NavigationHelper.pushRightToLeft(
+                context,
+                const ScreenSingleNews(),
+              );
+            },
+            child: const SingleNewsWidget(isMaxLinesWant: true)),
+      );
+    },
     separatorBuilder: (context, index) => Divider(
-      indent: 72,
-      color: Theme.of(context).colorScheme.secondary,
+      color: kBlackColor.withOpacity(0.2),
     ),
     itemCount: itemCount,
   );

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/utils/color_consts.dart';
+import 'package:news_app/view/common/navigation_helper.dart';
+import 'package:news_app/view/common/news_list_widget.dart';
+import 'package:news_app/view/search/screen_search.dart';
+import 'package:news_app/view/settings/screen_settings.dart';
 
 class ScreenHome extends StatefulWidget {
   const ScreenHome({super.key});
@@ -15,6 +19,12 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
   void initState() {
     _tabController = TabController(length: 4, vsync: this);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -36,9 +46,12 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
                 ),
                 borderRadius: BorderRadius.circular(30),
               ),
-              indicatorPadding:
-                  const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
-              // labelPadding: const EdgeInsets.symmetric(horizontal: 30),
+              indicatorPadding: const EdgeInsets.symmetric(
+                vertical: 8,
+              ),
+              labelPadding: const EdgeInsets.symmetric(
+                horizontal: 18,
+              ),
               overlayColor: const MaterialStatePropertyAll(
                 Colors.transparent,
               ),
@@ -63,18 +76,24 @@ class _ScreenHomeState extends State<ScreenHome> with TickerProviderStateMixin {
               ),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
+                  topLeft: Radius.circular(18),
+                  topRight: Radius.circular(18),
                 ),
                 color: Colors.grey.shade200,
               ),
               child: TabBarView(
                 controller: _tabController,
-                children: const [
-                  Center(child: Text('data')),
-                  Center(child: Text('data')),
-                  Center(child: Text('data')),
-                  Center(child: Text('data')),
+                children: [
+                  newsListWidget(
+                    'This is Title',
+                    'AAAAAAAAAAAAAAAAAAAA',
+                    () {},
+                    10,
+                    () {},
+                  ),
+                  const Center(child: Text('data')),
+                  const Center(child: Text('data')),
+                  const Center(child: Text('data')),
                 ],
               ),
             ),
@@ -97,14 +116,24 @@ AppBar _homeAppBar(BuildContext context) {
     ),
     actions: [
       IconButton(
-        onPressed: () {},
+        onPressed: () {
+          NavigationHelper.pushRightToLeft(
+            context,
+            const ScreenSearch(),
+          );
+        },
         icon: const Icon(
           Icons.search,
           size: 28,
         ),
       ),
       IconButton(
-        onPressed: () {},
+        onPressed: () {
+          NavigationHelper.pushRightToLeft(
+            context,
+            const ScreenSettings(),
+          );
+        },
         icon: const Icon(
           Icons.settings,
           size: 28,
