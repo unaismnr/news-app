@@ -8,7 +8,7 @@ import 'package:news_app/utils/api_consts.dart';
 Future<List<NewsDataModel>> getTopHeadlineApi() async {
   try {
     final response = await http.get(Uri.parse(
-      '${apiMainUrl}top-headlines?country=in&$apiKey',
+      '${apiMainUrl}top-headlines?country=us&$apiKey',
     ));
     if (response.statusCode == 200) {
       final parsed = jsonDecode(response.body);

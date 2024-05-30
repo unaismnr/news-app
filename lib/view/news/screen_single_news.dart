@@ -80,8 +80,6 @@ class ScreenSingleNews extends StatelessWidget {
                       news.title == null || news.title!.isEmpty
                           ? 'No Data Available'
                           : news.title!,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         color: kBlackColor,
                         fontWeight: FontWeight.bold,
@@ -93,7 +91,10 @@ class ScreenSingleNews extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        const Icon(Icons.person_pin),
+                        Icon(
+                          Icons.person_pin,
+                          color: kBlackColor.withOpacity(0.5),
+                        ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.007,
                         ),
@@ -113,35 +114,29 @@ class ScreenSingleNews extends StatelessWidget {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.01,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          news.source!.name == null ||
-                                  news.source!.name!.isEmpty
-                              ? 'No Data Available'
-                              : news.source!.name!,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: kMainColor,
-                            fontSize: 15,
-                          ),
+                    Text(
+                      news.source!.name == null || news.source!.name!.isEmpty
+                          ? 'No Data Available'
+                          : news.source!.name!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: kMainColor,
+                        fontSize: 15,
+                      ),
+                    ),
+                    Text(
+                      DateFormat('MMM d, yyyy h:mm a').format(
+                        DateTime.parse(
+                          news.publishedAt.toString(),
                         ),
-                        Text(
-                          DateFormat('MMM d, yyyy h:mm a').format(
-                            DateTime.parse(
-                              news.publishedAt.toString(),
-                            ),
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: kBlackColor.withOpacity(0.5),
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: kBlackColor.withOpacity(0.5),
+                        fontSize: 15,
+                      ),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.01,

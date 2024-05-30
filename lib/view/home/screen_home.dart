@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/controllers/search_provider.dart';
 import 'package:news_app/utils/color_consts.dart';
 import 'package:news_app/view/common/navigation_helper.dart';
 import 'package:news_app/view/home/news_list_widget.dart';
 import 'package:news_app/view/search/screen_search.dart';
 import 'package:news_app/view/settings/screen_settings.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});
@@ -99,9 +102,16 @@ AppBar _homeAppBar(BuildContext context) {
     actions: [
       IconButton(
         onPressed: () {
-          NavigationHelper.push(
+          Provider.of<SearchProvider>(
             context,
-            const ScreenSearch(),
+            listen: false,
+          ).resetSearch();
+          Navigator.of(context).push(
+            PageTransition(
+              child: const ScreenSearch(),
+              type: PageTransitionType.rightToLeft,
+              duration: const Duration(milliseconds: 150),
+            ),
           );
         },
         icon: const Icon(
@@ -121,7 +131,9 @@ AppBar _homeAppBar(BuildContext context) {
           size: 28,
         ),
       ),
-      SizedBox(width: MediaQuery.of(context).size.width * 0.02)
+      SizedBox(
+        width: MediaQuery.of(context).size.width * 0.02,
+      )
     ],
   );
 }

@@ -78,34 +78,29 @@ class SingleNewsWidget extends StatelessWidget {
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.006,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              news.source!.name == null || news.source!.name!.isEmpty
-                  ? 'No Data Available'
-                  : news.source!.name!,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                color: kMainColor,
-                fontSize: 15,
-              ),
+        Text(
+          news.source!.name == null || news.source!.name!.isEmpty
+              ? 'No Data Available'
+              : news.source!.name!,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            color: kMainColor,
+            fontSize: 15,
+          ),
+        ),
+        Text(
+          DateFormat('MMM d, yyyy h:mm a').format(
+            DateTime.parse(
+              news.publishedAt.toString(),
             ),
-            Text(
-              DateFormat('MMM d, yyyy h:mm a').format(
-                DateTime.parse(
-                  news.publishedAt.toString(),
-                ),
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: kBlackColor.withOpacity(0.5),
-                fontSize: 15,
-              ),
-            ),
-          ],
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            color: kBlackColor.withOpacity(0.5),
+            fontSize: 15,
+          ),
         ),
       ],
     );
