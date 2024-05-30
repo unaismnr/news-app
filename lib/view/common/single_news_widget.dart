@@ -38,9 +38,17 @@ class SingleNewsWidget extends StatelessWidget {
               alignment: Alignment.topRight,
               child: IconButton(
                 onPressed: () {},
-                icon: const Icon(
-                  Icons.favorite_border,
+                icon: Icon(
+                  Icons.favorite,
                   color: kWhiteColor,
+                  size: 35,
+                  shadows: [
+                    BoxShadow(
+                      color: kBlackColor.withOpacity(0.8),
+                      blurRadius: 10,
+                      spreadRadius: 10,
+                    )
+                  ],
                 ),
               ),
             ),
@@ -71,7 +79,11 @@ class SingleNewsWidget extends StatelessWidget {
           maxLines: isMaxLinesWant ? 2 : null,
           overflow: isMaxLinesWant ? TextOverflow.ellipsis : null,
           style: TextStyle(
-            color: isMaxLinesWant ? kBlackColor.withOpacity(0.6) : kBlackColor,
+            color: isMaxLinesWant
+                ? kBlackColor.withOpacity(
+                    0.6,
+                  )
+                : kBlackColor,
             fontSize: 15,
           ),
         ),

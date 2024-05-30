@@ -66,8 +66,16 @@ class ScreenSingleNews extends StatelessWidget {
                           child: IconButton(
                             onPressed: () {},
                             icon: const Icon(
-                              Icons.favorite_border,
+                              Icons.favorite,
                               color: kWhiteColor,
+                              size: 35,
+                              shadows: [
+                                BoxShadow(
+                                  color: kBlackColor,
+                                  blurRadius: 10,
+                                  spreadRadius: 10,
+                                )
+                              ],
                             ),
                           ),
                         ),
@@ -98,15 +106,17 @@ class ScreenSingleNews extends StatelessWidget {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.007,
                         ),
-                        Text(
-                          news.author == null || news.author!.isEmpty
-                              ? 'Unknown'
-                              : news.author.toString(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: kBlackColor.withOpacity(0.5),
-                            fontSize: 15,
+                        Expanded(
+                          child: Text(
+                            news.author == null || news.author!.isEmpty
+                                ? 'Unknown'
+                                : news.author.toString(),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: kBlackColor.withOpacity(0.5),
+                              fontSize: 15,
+                            ),
                           ),
                         ),
                       ],

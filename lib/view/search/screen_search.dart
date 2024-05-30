@@ -50,7 +50,7 @@ class ScreenSearch extends StatelessWidget {
                       );
                     } else if (snapshot.data!.isEmpty) {
                       return const Center(
-                        child: Text('No Data'),
+                        child: Text('Nothing Found'),
                       );
                     } else if (snapshot.hasError) {
                       return const Text(
@@ -80,16 +80,17 @@ class ScreenSearch extends StatelessWidget {
                                   vertical: 5,
                                 ),
                                 child: InkWell(
-                                    onTap: () {
-                                      NavigationHelper.push(
-                                        context,
-                                        ScreenSingleNews(news: news),
-                                      );
-                                    },
-                                    child: SingleNewsWidget(
-                                      isMaxLinesWant: true,
-                                      news: news,
-                                    )),
+                                  onTap: () {
+                                    NavigationHelper.push(
+                                      context,
+                                      ScreenSingleNews(news: news),
+                                    );
+                                  },
+                                  child: SingleNewsWidget(
+                                    isMaxLinesWant: true,
+                                    news: news,
+                                  ),
+                                ),
                               );
                             },
                             separatorBuilder: (context, index) => Divider(

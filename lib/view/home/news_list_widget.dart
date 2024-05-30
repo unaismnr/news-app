@@ -6,10 +6,10 @@ import 'package:news_app/view/common/navigation_helper.dart';
 import 'package:news_app/view/common/single_news_widget.dart';
 import 'package:news_app/view/news/screen_single_news.dart';
 
-class NewListWidget extends StatelessWidget {
+class NewsListWidget extends StatelessWidget {
   final bool isTopHeadline;
   final String category;
-  const NewListWidget({
+  const NewsListWidget({
     super.key,
     this.isTopHeadline = false,
     this.category = '',
@@ -18,8 +18,11 @@ class NewListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future:
-            isTopHeadline ? getTopHeadlineApi() : getCategoryNewsApi(category),
+        future: isTopHeadline
+            ? getTopHeadlineApi()
+            : getCategoryNewsApi(
+                category,
+              ),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
