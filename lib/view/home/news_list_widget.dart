@@ -26,7 +26,9 @@ class NewListWidget extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.data == null) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           } else if (snapshot.data!.isEmpty) {
             return const Center(
               child: Text('No Data'),
@@ -46,7 +48,7 @@ class NewListWidget extends StatelessWidget {
                   ),
                   child: InkWell(
                       onTap: () {
-                        NavigationHelper.pushRightToLeft(
+                        NavigationHelper.push(
                           context,
                           ScreenSingleNews(news: news),
                         );

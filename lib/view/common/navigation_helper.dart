@@ -3,7 +3,7 @@ import 'package:page_transition/page_transition.dart';
 
 class NavigationHelper {
   //PushRightToLeft
-  static void pushRightToLeft(BuildContext context, Widget page) {
+  static void push(BuildContext context, Widget page) {
     Navigator.of(context).push(
       PageTransition(
         child: page,

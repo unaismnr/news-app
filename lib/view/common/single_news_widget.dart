@@ -50,7 +50,9 @@ class SingleNewsWidget extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.008,
         ),
         Text(
-          news.title.toString(),
+          news.title == null || news.title!.isEmpty
+              ? 'No Data Available'
+              : news.title!,
           maxLines: isMaxLinesWant ? 2 : null,
           overflow: isMaxLinesWant ? TextOverflow.ellipsis : null,
           style: const TextStyle(
@@ -59,8 +61,13 @@ class SingleNewsWidget extends StatelessWidget {
             fontSize: 18,
           ),
         ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.006,
+        ),
         Text(
-          news.description.toString(),
+          news.description == null
+              ? 'No Data Available'
+              : news.description.toString(),
           maxLines: isMaxLinesWant ? 2 : null,
           overflow: isMaxLinesWant ? TextOverflow.ellipsis : null,
           style: TextStyle(
@@ -68,12 +75,17 @@ class SingleNewsWidget extends StatelessWidget {
             fontSize: 15,
           ),
         ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.006,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              news.source!.name.toString(),
-              maxLines: 2,
+              news.source!.name == null || news.source!.name!.isEmpty
+                  ? 'No Data Available'
+                  : news.source!.name!,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 color: kMainColor,
@@ -81,12 +93,12 @@ class SingleNewsWidget extends StatelessWidget {
               ),
             ),
             Text(
-              DateFormat.MMMEd().format(
+              DateFormat('MMM d, yyyy h:mm a').format(
                 DateTime.parse(
                   news.publishedAt.toString(),
                 ),
               ),
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: kBlackColor.withOpacity(0.5),

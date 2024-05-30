@@ -17,7 +17,7 @@ class ScreenHome extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 10, top: 1),
+              padding: const EdgeInsets.only(left: 10),
               child: TabBar(
                 indicatorColor: kMainColor,
                 isScrollable: true,
@@ -65,7 +65,7 @@ class ScreenHome extends StatelessWidget {
                     topLeft: Radius.circular(18),
                     topRight: Radius.circular(18),
                   ),
-                  color: Colors.grey.shade200,
+                  color: kBlackColor.withOpacity(0.05),
                 ),
                 child: const TabBarView(
                   children: [
@@ -90,8 +90,6 @@ class ScreenHome extends StatelessWidget {
 
 AppBar _homeAppBar(BuildContext context) {
   return AppBar(
-    iconTheme: const IconThemeData(color: kBlackColor),
-    backgroundColor: kWhiteColor,
     elevation: 0,
     title: Image.asset(
       'assets/news-app-logos.png',
@@ -101,7 +99,7 @@ AppBar _homeAppBar(BuildContext context) {
     actions: [
       IconButton(
         onPressed: () {
-          NavigationHelper.pushRightToLeft(
+          NavigationHelper.push(
             context,
             const ScreenSearch(),
           );
@@ -113,7 +111,7 @@ AppBar _homeAppBar(BuildContext context) {
       ),
       IconButton(
         onPressed: () {
-          NavigationHelper.pushRightToLeft(
+          NavigationHelper.push(
             context,
             const ScreenSettings(),
           );
