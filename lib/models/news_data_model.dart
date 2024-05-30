@@ -1,5 +1,7 @@
+import 'package:news_app/models/source_model.dart';
+
 class NewsDataModel {
-  Source? source;
+  SourceModel? source;
   String? author;
   String? title;
   String? description;
@@ -20,7 +22,7 @@ class NewsDataModel {
 
   NewsDataModel.fromJson(Map<String, dynamic> json) {
     source = json['source'] != null
-        ? Source.fromJson(
+        ? SourceModel.fromJson(
             json['source'],
           )
         : null;
@@ -31,17 +33,5 @@ class NewsDataModel {
     urlToImage = json['urlToImage'];
     publishedAt = json['publishedAt'];
     content = json['content'];
-  }
-}
-
-class Source {
-  String? id;
-  String? name;
-
-  Source({this.id, this.name});
-
-  Source.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
   }
 }

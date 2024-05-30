@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:news_app/controllers/search_provider.dart';
 import 'package:news_app/utils/color_consts.dart';
 import 'package:news_app/view/common/navigation_helper.dart';
+import 'package:news_app/view/favorites/screen_favorites.dart';
 import 'package:news_app/view/home/news_list_widget.dart';
 import 'package:news_app/view/search/screen_search.dart';
-import 'package:news_app/view/settings/screen_settings.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
@@ -123,11 +123,11 @@ AppBar _homeAppBar(BuildContext context) {
         onPressed: () {
           NavigationHelper.push(
             context,
-            const ScreenSettings(),
+            const ScreenFavorites(),
           );
         },
         icon: const Icon(
-          Icons.settings,
+          Icons.favorite_border,
           size: 28,
         ),
       ),

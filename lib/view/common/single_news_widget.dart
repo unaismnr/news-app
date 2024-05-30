@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:news_app/models/favorite_model.dart';
 import 'package:news_app/models/news_data_model.dart';
+import 'package:news_app/services/hive/favorite_db.dart';
 import 'package:news_app/utils/color_consts.dart';
 
 class SingleNewsWidget extends StatelessWidget {
   final bool isMaxLinesWant;
   final NewsDataModel news;
+  final bool isFavOrDelete;
   const SingleNewsWidget({
     super.key,
     required this.isMaxLinesWant,
     required this.news,
+    this.isFavOrDelete = true,
   });
 
   @override
@@ -36,19 +40,40 @@ class SingleNewsWidget extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.favorite,
-                  color: kWhiteColor,
-                  size: 35,
-                  shadows: [
-                    BoxShadow(
-                      color: kBlackColor.withOpacity(0.8),
-                      blurRadius: 10,
-                      spreadRadius: 10,
-                    )
-                  ],
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.047,
+                  child: InkWell(
+                    onTap: () {
+                      final favorites = FavoriteModel(
+                        source: news.source,
+                        title: news.title,
+                        author: news.author,
+                        description: news.description,
+                        content: news.content,
+                        publishedAt: news.publishedAt,
+                        url: news.url,
+                        urlToImage: news.urlToImage,
+                      );
+                      isFavOrDelete
+                          ? FavoriteDb.instance.addFavorite(favorites)
+                          : FavoriteDb.instance.deleteFavorite(
+                              favorites.url!,
+                            );
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.grey.shade200,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 1),
+                        child: Icon(
+                          isFavOrDelete ? Icons.favorite_border : Icons.delete,
+                          color: Colors.black,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

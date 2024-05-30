@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:news_app/controllers/favorite_provider.dart';
 import 'package:news_app/controllers/search_provider.dart';
+import 'package:news_app/models/favorite_model.dart';
+import 'package:news_app/models/source_model.dart';
 import 'package:news_app/utils/color_consts.dart';
 import 'package:news_app/view/home/screen_home.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(
+    FavoriteModelAdapter().typeId,
+  )) {
+    Hive.registerAdapter(
+      FavoriteModelAdapter(),
+    );
+  }
+  if (!Hive.isAdapterRegistered(
+    SourceModelAdapter().typeId,
+  )) {
+    Hive.registerAdapter(
+      SourceModelAdapter(),
+    );
+    runApp(const MyApp());
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -18,6 +38,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => SearchProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FavoriteProvider(),
         ),
       ],
       child: MaterialApp(
