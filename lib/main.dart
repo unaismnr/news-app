@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:news_app/controllers/favorite_provider.dart';
@@ -8,10 +11,13 @@ import 'package:news_app/utils/my_theme.dart';
 import 'package:news_app/view/home/screen_home.dart';
 import 'package:provider/provider.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   hiveRegister();
+  await SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp],
+  );
   runApp(
     const ScreenUtilInit(
       designSize: Size(375, 812),

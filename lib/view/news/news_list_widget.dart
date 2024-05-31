@@ -48,7 +48,7 @@ class NewsListWidget extends StatelessWidget {
               return Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 12.w,
-                  vertical: 5.h,
+                  vertical: 10.h,
                 ),
                 child: InkWell(
                   onTap: () {
@@ -56,7 +56,7 @@ class NewsListWidget extends StatelessWidget {
                       context,
                       ScreenSingleNews(
                         news: news,
-                        isFavOrDelete: true,
+                        isFav: true,
                       ),
                     );
                   },

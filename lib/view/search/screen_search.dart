@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:news_app/controllers/search_provider.dart';
 import 'package:news_app/services/apis/get_category_news_api.dart';
 import 'package:news_app/utils/color_consts.dart';
+import 'package:news_app/utils/other_consts.dart';
+import 'package:news_app/view/common/background_container.dart';
 import 'package:news_app/view/common/navigation_helper.dart';
 import 'package:news_app/view/common/single_news_widget.dart';
 import 'package:news_app/view/news/screen_single_news.dart';
@@ -31,7 +33,7 @@ class ScreenSearch extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SizedBox(height: 10.h),
+          kHeight10,
           Consumer<SearchProvider>(
             builder: (context, newSearch, _) {
               return FutureBuilder(
@@ -57,19 +59,7 @@ class ScreenSearch extends StatelessWidget {
                       );
                     } else if (snapshot.hasData) {
                       return Expanded(
-                        child: Container(
-                          height: MediaQuery.of(context).size.height,
-                          width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 15.w,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(18.r),
-                              topRight: Radius.circular(18.r),
-                            ),
-                            color: kBlackColor.withOpacity(0.05),
-                          ),
+                        child: BackgroundContainer(
                           child: ListView.separated(
                             itemBuilder: (context, index) {
                               final news = snapshot.data![index];
@@ -84,7 +74,7 @@ class ScreenSearch extends StatelessWidget {
                                       context,
                                       ScreenSingleNews(
                                         news: news,
-                                        isFavOrDelete: false,
+                                        isFav: true,
                                       ),
                                     );
                                   },

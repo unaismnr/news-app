@@ -5,6 +5,8 @@ import 'package:news_app/models/favorite_model.dart';
 import 'package:news_app/models/news_data_model.dart';
 import 'package:news_app/services/hive/favorite_db.dart';
 import 'package:news_app/utils/color_consts.dart';
+import 'package:news_app/view/common/circle_icon_widget.dart';
+import 'package:news_app/view/common/news_image_container.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -34,26 +36,16 @@ class SingleNewsWidget extends StatelessWidget {
       children: [
         Stack(
           children: [
-            Container(
-              height: 200.h,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: kMainColor.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(10.w),
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: news.urlToImage != null && news.urlToImage!.isNotEmpty
-                      ? NetworkImage(news.urlToImage!)
-                      : const AssetImage('assets/bg-image.png')
-                          as ImageProvider,
-                ),
-              ),
+            NewsImageContainer(
+              image: news.urlToImage != null && news.urlToImage!.isNotEmpty
+                  ? NetworkImage(news.urlToImage!)
+                  : const AssetImage('assets/bg-image.png') as ImageProvider,
             ),
             Align(
               alignment: Alignment.topRight,
               child: Padding(
                 padding: EdgeInsets.all(8.w),
-                child: InkWell(
+                child: CircleIconWidget(
                   onTap: () {
                     final favorites = FavoriteModel(
                       source: news.source,
@@ -72,18 +64,10 @@ class SingleNewsWidget extends StatelessWidget {
                           );
                     favProvider.getFavoriteNews();
                   },
-                  child: CircleAvatar(
-                    radius: 15.w,
-                    backgroundColor: Colors.grey.shade300,
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 1.h),
-                      child: Icon(
-                        isFavOrDelete ? Icons.favorite : Icons.delete,
-                        color: isAlreadyInFav ? kBlackColor : kMainColor,
-                        size: 25.sp,
-                      ),
-                    ),
-                  ),
+                  radius: 15.w,
+                  iconColor: isAlreadyInFav ? kBlackColor : kMainColor,
+                  iconSize: 25.sp,
+                  icon: isFavOrDelete ? Icons.favorite : Icons.delete,
                 ),
               ),
             ),
@@ -102,9 +86,7 @@ class SingleNewsWidget extends StatelessWidget {
             fontSize: 18.sp,
           ),
         ),
-        SizedBox(
-          height: 4.h,
-        ),
+        SizedBox(height: 4.h),
         Text(
           news.source!.name == null || news.source!.name!.isEmpty
               ? 'No Data Available'
