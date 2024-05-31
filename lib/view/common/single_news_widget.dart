@@ -6,6 +6,7 @@ import 'package:news_app/models/news_data_model.dart';
 import 'package:news_app/services/hive/favorite_db.dart';
 import 'package:news_app/utils/color_consts.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SingleNewsWidget extends StatelessWidget {
   final bool isMaxLinesWant;
@@ -34,11 +35,11 @@ class SingleNewsWidget extends StatelessWidget {
         Stack(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.21,
-              width: MediaQuery.of(context).size.width,
+              height: 200.h,
+              width: double.infinity,
               decoration: BoxDecoration(
                 color: kMainColor.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.w),
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: news.urlToImage != null && news.urlToImage!.isNotEmpty
@@ -51,7 +52,7 @@ class SingleNewsWidget extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.w),
                 child: InkWell(
                   onTap: () {
                     final favorites = FavoriteModel(
@@ -72,14 +73,14 @@ class SingleNewsWidget extends StatelessWidget {
                     favProvider.getFavoriteNews();
                   },
                   child: CircleAvatar(
-                    radius: 15,
+                    radius: 15.w,
                     backgroundColor: Colors.grey.shade300,
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 1),
+                      padding: EdgeInsets.only(top: 1.h),
                       child: Icon(
                         isFavOrDelete ? Icons.favorite : Icons.delete,
                         color: isAlreadyInFav ? kBlackColor : kMainColor,
-                        size: 25,
+                        size: 25.sp,
                       ),
                     ),
                   ),
@@ -88,41 +89,21 @@ class SingleNewsWidget extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.008,
-        ),
+        SizedBox(height: 8.h),
         Text(
           news.title == null || news.title!.isEmpty
               ? 'No Data Available'
               : news.title!,
           maxLines: isMaxLinesWant ? 2 : null,
           overflow: isMaxLinesWant ? TextOverflow.ellipsis : null,
-          style: const TextStyle(
+          style: TextStyle(
             color: kBlackColor,
             fontWeight: FontWeight.bold,
-            fontSize: 18,
+            fontSize: 18.sp,
           ),
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.006,
-        ),
-        Text(
-          news.description == null
-              ? 'No Data Available'
-              : news.description.toString(),
-          maxLines: isMaxLinesWant ? 2 : null,
-          overflow: isMaxLinesWant ? TextOverflow.ellipsis : null,
-          style: TextStyle(
-            color: isMaxLinesWant
-                ? kBlackColor.withOpacity(
-                    0.6,
-                  )
-                : kBlackColor,
-            fontSize: 15,
-          ),
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.006,
+          height: 4.h,
         ),
         Text(
           news.source!.name == null || news.source!.name!.isEmpty
@@ -130,9 +111,9 @@ class SingleNewsWidget extends StatelessWidget {
               : news.source!.name!,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
+          style: TextStyle(
             color: kMainColor,
-            fontSize: 15,
+            fontSize: 15.sp,
           ),
         ),
         Text(
@@ -145,7 +126,7 @@ class SingleNewsWidget extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             color: kBlackColor.withOpacity(0.5),
-            fontSize: 15,
+            fontSize: 15.sp,
           ),
         ),
       ],

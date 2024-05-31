@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/controllers/favorite_provider.dart';
 import 'package:news_app/controllers/search_provider.dart';
 import 'package:news_app/utils/color_consts.dart';
@@ -22,7 +23,7 @@ class ScreenHome extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 10),
+              padding: EdgeInsets.only(left: 10.w),
               child: TabBar(
                 indicatorColor: kMainColor,
                 isScrollable: true,
@@ -30,17 +31,17 @@ class ScreenHome extends StatelessWidget {
                 indicator: BoxDecoration(
                   border: Border.all(
                     color: kMainColor,
-                    width: 1.5,
+                    width: 1.5.w,
                   ),
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(30.r),
                 ),
-                indicatorPadding: const EdgeInsets.symmetric(
-                  vertical: 8,
+                indicatorPadding: EdgeInsets.symmetric(
+                  vertical: 8.h,
                 ),
-                labelPadding: const EdgeInsets.symmetric(
-                  horizontal: 18,
+                labelPadding: EdgeInsets.symmetric(
+                  horizontal: 18.w,
                 ),
-                overlayColor: const MaterialStatePropertyAll(
+                overlayColor: MaterialStateProperty.all(
                   Colors.transparent,
                 ),
                 dividerColor: Colors.transparent,
@@ -62,13 +63,13 @@ class ScreenHome extends StatelessWidget {
               child: Container(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 15,
+                margin: EdgeInsets.symmetric(
+                  horizontal: 15.w,
                 ),
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(18),
-                    topRight: Radius.circular(18),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(18.r),
+                    topRight: Radius.circular(18.r),
                   ),
                   color: kBlackColor.withOpacity(0.05),
                 ),
@@ -98,12 +99,12 @@ AppBar _homeAppBar(BuildContext context) {
     elevation: 0,
     title: Image.asset(
       'assets/app-news.png',
-      height: MediaQuery.of(context).size.height * 0.07,
-      width: MediaQuery.of(context).size.width * 0.38,
+      height: MediaQuery.of(context).size.height * 0.07.h,
+      width: MediaQuery.of(context).size.width * 0.38.w,
     ),
     actions: [
       InkWell(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(30.r),
         onTap: () {
           Provider.of<SearchProvider>(
             context,
@@ -119,21 +120,21 @@ AppBar _homeAppBar(BuildContext context) {
         },
         child: CircleAvatar(
           backgroundColor: Colors.grey.shade300,
-          child: const Padding(
-            padding: EdgeInsets.only(top: 1),
+          child: Padding(
+            padding: EdgeInsets.only(top: 1.h),
             child: Icon(
               Icons.search_rounded,
               color: kBlackColor,
-              size: 30,
+              size: 30.sp,
             ),
           ),
         ),
       ),
       SizedBox(
-        width: MediaQuery.of(context).size.width * 0.02,
+        width: MediaQuery.of(context).size.width * 0.02.w,
       ),
       InkWell(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(30.r),
         onTap: () {
           NavigationHelper.push(
             context,
@@ -142,18 +143,18 @@ AppBar _homeAppBar(BuildContext context) {
         },
         child: CircleAvatar(
           backgroundColor: Colors.grey.shade300,
-          child: const Padding(
-            padding: EdgeInsets.only(top: 1),
+          child: Padding(
+            padding: EdgeInsets.only(top: 1.h),
             child: Icon(
               Icons.favorite_border,
               color: kBlackColor,
-              size: 30,
+              size: 30.sp,
             ),
           ),
         ),
       ),
       SizedBox(
-        width: MediaQuery.of(context).size.width * 0.04,
+        width: MediaQuery.of(context).size.width * 0.04.w,
       ),
     ],
   );

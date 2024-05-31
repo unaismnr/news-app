@@ -7,6 +7,7 @@ import 'package:news_app/services/hive/favorite_db.dart';
 import 'package:news_app/utils/color_consts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScreenSingleNews extends StatelessWidget {
   final NewsDataModel news;
@@ -38,35 +39,33 @@ class ScreenSingleNews extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
-            ),
+            SizedBox(height: 10.h),
             Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.symmetric(
-                horizontal: 15,
+              margin: EdgeInsets.symmetric(
+                horizontal: 15.w,
               ),
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(18),
-                  topRight: Radius.circular(18),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(18.w),
+                  topRight: Radius.circular(18.w),
                 ),
                 color: kBlackColor.withOpacity(0.05),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: EdgeInsets.all(10.sp),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Stack(
                       children: [
                         Container(
-                          height: MediaQuery.of(context).size.height * 0.21,
-                          width: MediaQuery.of(context).size.width,
+                          height: 200.h,
+                          width: double.infinity,
                           decoration: BoxDecoration(
                             color: kMainColor.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10.w),
                             image: DecorationImage(
                               fit: BoxFit.cover,
                               image: news.urlToImage != null &&
@@ -80,7 +79,7 @@ class ScreenSingleNews extends StatelessWidget {
                         Align(
                           alignment: Alignment.topRight,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.w),
                             child: InkWell(
                               onTap: () {
                                 final favorites = FavoriteModel(
@@ -104,10 +103,10 @@ class ScreenSingleNews extends StatelessWidget {
                                     : const SizedBox();
                               },
                               child: CircleAvatar(
-                                radius: 15,
+                                radius: 15.w,
                                 backgroundColor: Colors.grey.shade300,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(top: 1),
+                                  padding: EdgeInsets.only(top: 1.h),
                                   child: Icon(
                                     isFavOrDelete
                                         ? Icons.favorite
@@ -115,7 +114,7 @@ class ScreenSingleNews extends StatelessWidget {
                                     color: isAlreadyInFav
                                         ? kBlackColor
                                         : kMainColor,
-                                    size: 25,
+                                    size: 25.sp,
                                   ),
                                 ),
                               ),
@@ -124,22 +123,18 @@ class ScreenSingleNews extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.01,
-                    ),
+                    SizedBox(height: 10.h),
                     Text(
                       news.title == null || news.title!.isEmpty
                           ? 'No Data Available'
                           : news.title!,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: kBlackColor,
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 18.sp,
                       ),
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.01,
-                    ),
+                    SizedBox(height: 10.h),
                     Row(
                       children: [
                         Icon(
@@ -147,7 +142,7 @@ class ScreenSingleNews extends StatelessWidget {
                           color: kBlackColor.withOpacity(0.5),
                         ),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.007,
+                          width: 7.w,
                         ),
                         Expanded(
                           child: Text(
@@ -158,14 +153,14 @@ class ScreenSingleNews extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: kBlackColor.withOpacity(0.5),
-                              fontSize: 15,
+                              fontSize: 15.sp,
                             ),
                           ),
                         ),
                       ],
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.01,
+                      height: 10.h,
                     ),
                     Text(
                       news.source!.name == null || news.source!.name!.isEmpty
@@ -173,9 +168,9 @@ class ScreenSingleNews extends StatelessWidget {
                           : news.source!.name!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: kMainColor,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                       ),
                     ),
                     Text(
@@ -188,40 +183,33 @@ class ScreenSingleNews extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: kBlackColor.withOpacity(0.5),
-                        fontSize: 15,
+                        fontSize: 15.sp,
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.01,
+                      height: 10.h,
                     ),
                     Text(
                       news.content == null
                           ? 'No Data Available'
                           : news.content.toString(),
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: kBlackColor,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.01,
+                      height: 10.h,
                     ),
                     TextButton(
-                      onPressed: () {
-                        _launchURL(
-                          context,
-                          news.url != null && news.url!.isNotEmpty
-                              ? news.url!
-                              : '',
-                        );
-                      },
+                      onPressed: () => _launchURL(context, news.url ?? ''),
                       child: Text(
                         'Read More - ${news.url == null ? 'No Data' : news.url!}',
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: kMainColor,
-                          fontSize: 15,
+                          fontSize: 15.sp,
                         ),
                       ),
                     ),
@@ -240,6 +228,7 @@ class ScreenSingleNews extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Url is not working')),
       );
+      return;
     }
     if (!await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url));
