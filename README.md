@@ -1,4 +1,4 @@
-<h2 align="center">Task Management App</h2>
+<h2 align="center">News App</h2>
 
 - For run this project:
 - Clone this repo.
