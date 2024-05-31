@@ -39,7 +39,7 @@ class SingleNewsWidget extends StatelessWidget {
             NewsImageContainer(
               image: news.urlToImage != null && news.urlToImage!.isNotEmpty
                   ? NetworkImage(news.urlToImage!)
-                  : const AssetImage('assets/bg-image.png') as ImageProvider,
+                  : const AssetImage('assets/image-no.png') as ImageProvider,
             ),
             Align(
               alignment: Alignment.topRight,

@@ -7,7 +7,7 @@ class NavigationHelper {
       PageTransition(
         child: page,
         type: PageTransitionType.rightToLeft,
-        duration: const Duration(milliseconds: 150),
+        duration: const Duration(milliseconds: 130),
       ),
     );
   }

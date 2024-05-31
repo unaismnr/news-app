@@ -15,7 +15,7 @@ class NewsImageContainer extends StatelessWidget {
       height: 200.h,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: kMainColor.withOpacity(0.2),
+        color: kMainColor.withOpacity(0.1),
         borderRadius: BorderRadius.circular(10.w),
         image: DecorationImage(
           fit: BoxFit.cover,

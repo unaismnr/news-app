@@ -1,2 +1,2 @@
 const apiMainUrl = 'https://newsapi.org/v2/';
-const apiKey = 'apiKey=a97d485b2fc544cda4a2a8d23fd7d7b8';
+const apiKey = 'apiKey=6cf839395365447bafbefc5d627e5f88';

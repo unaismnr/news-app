@@ -58,7 +58,7 @@ class ScreenSingleNews extends StatelessWidget {
                                     news.urlToImage!.isNotEmpty
                                 ? NetworkImage(news.urlToImage!)
                                 : const AssetImage(
-                                    'assets/bg-image.png',
+                                    'assets/image-no.png',
                                   ) as ImageProvider,
                           ),
                           Align(
