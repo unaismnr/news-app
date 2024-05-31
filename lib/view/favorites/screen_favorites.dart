@@ -40,15 +40,14 @@ class ScreenFavorites extends StatelessWidget {
               ),
               child: Consumer<FavoriteProvider>(
                   builder: (context, newFavorites, _) {
-                if (newFavorites.favoriteNews == null ||
-                    newFavorites.favoriteNews!.isEmpty) {
+                if (newFavorites.favoriteNews.isEmpty) {
                   return const Center(
                     child: Text('No Favorites'),
                   );
                 } else {
                   return ListView.separated(
                     itemBuilder: (context, index) {
-                      final favorites = newFavorites.favoriteNews![index];
+                      final favorites = newFavorites.favoriteNews[index];
                       final news = NewsDataModel(
                         source: favorites.source,
                         author: favorites.author,
@@ -68,7 +67,11 @@ class ScreenFavorites extends StatelessWidget {
                           onTap: () {
                             NavigationHelper.push(
                               context,
-                              ScreenSingleNews(news: news),
+                              ScreenSingleNews(
+                                news: news,
+                                isFavOrDelete: false,
+                                isFromFav: true,
+                              ),
                             );
                           },
                           child: SingleNewsWidget(
@@ -82,7 +85,7 @@ class ScreenFavorites extends StatelessWidget {
                     separatorBuilder: (context, index) => Divider(
                       color: kBlackColor.withOpacity(0.2),
                     ),
-                    itemCount: newFavorites.favoriteNews!.length,
+                    itemCount: newFavorites.favoriteNews.length,
                   );
                 }
               }),

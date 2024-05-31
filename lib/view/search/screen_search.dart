@@ -83,7 +83,10 @@ class ScreenSearch extends StatelessWidget {
                                   onTap: () {
                                     NavigationHelper.push(
                                       context,
-                                      ScreenSingleNews(news: news),
+                                      ScreenSingleNews(
+                                        news: news,
+                                        isFavOrDelete: false,
+                                      ),
                                     );
                                   },
                                   child: SingleNewsWidget(

@@ -53,7 +53,10 @@ class NewsListWidget extends StatelessWidget {
                       onTap: () {
                         NavigationHelper.push(
                           context,
-                          ScreenSingleNews(news: news),
+                          ScreenSingleNews(
+                            news: news,
+                            isFavOrDelete: true,
+                          ),
                         );
                       },
                       child: SingleNewsWidget(

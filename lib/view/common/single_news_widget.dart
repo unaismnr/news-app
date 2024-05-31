@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:news_app/controllers/favorite_provider.dart';
 import 'package:news_app/models/favorite_model.dart';
 import 'package:news_app/models/news_data_model.dart';
 import 'package:news_app/services/hive/favorite_db.dart';
 import 'package:news_app/utils/color_consts.dart';
+import 'package:provider/provider.dart';
 
 class SingleNewsWidget extends StatelessWidget {
   final bool isMaxLinesWant;
@@ -18,6 +20,14 @@ class SingleNewsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final favProvider = Provider.of<FavoriteProvider>(
+      context,
+    );
+    final isAlreadyInFav = favProvider.favoriteNews
+        .where(
+          (element) => element.url == news.url,
+        )
+        .isEmpty;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -27,13 +37,13 @@ class SingleNewsWidget extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.21,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                color: kMainColor,
+                color: kMainColor.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: news.urlToImage != null && news.urlToImage!.isNotEmpty
                       ? NetworkImage(news.urlToImage!)
-                      : const AssetImage('assets/news-app-logos.png')
+                      : const AssetImage('assets/bg-image.png')
                           as ImageProvider,
                 ),
               ),
@@ -42,35 +52,34 @@ class SingleNewsWidget extends StatelessWidget {
               alignment: Alignment.topRight,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.047,
-                  child: InkWell(
-                    onTap: () {
-                      final favorites = FavoriteModel(
-                        source: news.source,
-                        title: news.title,
-                        author: news.author,
-                        description: news.description,
-                        content: news.content,
-                        publishedAt: news.publishedAt,
-                        url: news.url,
-                        urlToImage: news.urlToImage,
-                      );
-                      isFavOrDelete
-                          ? FavoriteDb.instance.addFavorite(favorites)
-                          : FavoriteDb.instance.deleteFavorite(
-                              favorites.url!,
-                            );
-                    },
-                    child: CircleAvatar(
-                      backgroundColor: Colors.grey.shade200,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 1),
-                        child: Icon(
-                          isFavOrDelete ? Icons.favorite_border : Icons.delete,
-                          color: Colors.black,
-                          size: 30,
-                        ),
+                child: InkWell(
+                  onTap: () {
+                    final favorites = FavoriteModel(
+                      source: news.source,
+                      title: news.title,
+                      author: news.author,
+                      description: news.description,
+                      content: news.content,
+                      publishedAt: news.publishedAt,
+                      url: news.url,
+                      urlToImage: news.urlToImage,
+                    );
+                    isAlreadyInFav && isFavOrDelete
+                        ? FavoriteDb.instance.addFavorite(favorites)
+                        : FavoriteDb.instance.deleteFavorite(
+                            favorites.url!,
+                          );
+                    favProvider.getFavoriteNews();
+                  },
+                  child: CircleAvatar(
+                    radius: 15,
+                    backgroundColor: Colors.grey.shade300,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 1),
+                      child: Icon(
+                        isFavOrDelete ? Icons.favorite : Icons.delete,
+                        color: isAlreadyInFav ? kBlackColor : kMainColor,
+                        size: 25,
                       ),
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/controllers/favorite_provider.dart';
 import 'package:news_app/controllers/search_provider.dart';
 import 'package:news_app/utils/color_consts.dart';
 import 'package:news_app/view/common/navigation_helper.dart';
@@ -13,6 +14,7 @@ class ScreenHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<FavoriteProvider>(context).getFavoriteNews();
     return Scaffold(
       appBar: _homeAppBar(context),
       body: DefaultTabController(
@@ -95,13 +97,14 @@ AppBar _homeAppBar(BuildContext context) {
   return AppBar(
     elevation: 0,
     title: Image.asset(
-      'assets/news-app-logos.png',
+      'assets/app-news.png',
       height: MediaQuery.of(context).size.height * 0.07,
       width: MediaQuery.of(context).size.width * 0.38,
     ),
     actions: [
-      IconButton(
-        onPressed: () {
+      InkWell(
+        borderRadius: BorderRadius.circular(30),
+        onTap: () {
           Provider.of<SearchProvider>(
             context,
             listen: false,
@@ -114,26 +117,44 @@ AppBar _homeAppBar(BuildContext context) {
             ),
           );
         },
-        icon: const Icon(
-          Icons.search,
-          size: 28,
+        child: CircleAvatar(
+          backgroundColor: Colors.grey.shade300,
+          child: const Padding(
+            padding: EdgeInsets.only(top: 1),
+            child: Icon(
+              Icons.search_rounded,
+              color: kBlackColor,
+              size: 30,
+            ),
+          ),
         ),
       ),
-      IconButton(
-        onPressed: () {
+      SizedBox(
+        width: MediaQuery.of(context).size.width * 0.02,
+      ),
+      InkWell(
+        borderRadius: BorderRadius.circular(30),
+        onTap: () {
           NavigationHelper.push(
             context,
             const ScreenFavorites(),
           );
         },
-        icon: const Icon(
-          Icons.favorite_border,
-          size: 28,
+        child: CircleAvatar(
+          backgroundColor: Colors.grey.shade300,
+          child: const Padding(
+            padding: EdgeInsets.only(top: 1),
+            child: Icon(
+              Icons.favorite_border,
+              color: kBlackColor,
+              size: 30,
+            ),
+          ),
         ),
       ),
       SizedBox(
-        width: MediaQuery.of(context).size.width * 0.02,
-      )
+        width: MediaQuery.of(context).size.width * 0.04,
+      ),
     ],
   );
 }
