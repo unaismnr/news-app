@@ -2,6 +2,6 @@
 
 - For run this project:
 - Clone this repo.
-- Run Flutter Pub Get in Command.
+- Run flutter pub get in Command.
 - Downlod images from drive link and add them to assets folder.
 - And run.
