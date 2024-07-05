@@ -42,7 +42,7 @@ class ScreenHome extends StatelessWidget {
                 labelPadding: EdgeInsets.symmetric(
                   horizontal: 18.w,
                 ),
-                overlayColor: MaterialStateProperty.all(
+                overlayColor: WidgetStateProperty.all(
                   Colors.transparent,
                 ),
                 dividerColor: Colors.transparent,
